@@ -1,0 +1,50 @@
+{
+  "name": "breeze-tab",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.26.0",
+  "homepage": "https://github.com/naiheyoung/breeze-tab#README",
+  "repository": {
+    "git": "https://github.com/naiheyoung/breeze-tab"
+  },
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite --port 3000",
+    "preview": "vite preview",
+    "format": "prettier --write src/",
+    "format:check": "prettier --check src/"
+  },
+  "dependencies": {
+    "@vueuse/core": "^14.1.0",
+    "chrome-types": "^0.1.400",
+    "dayjs": "^1.11.19",
+    "pinia": "^3.0.4",
+    "vue": "^3.5.25"
+  },
+  "devDependencies": {
+    "@iconify-json/carbon": "^1.2.15",
+    "@iconify-json/logos": "^1.2.10",
+    "@iconify-json/lucide": "^1.2.81",
+    "@naiheyoung/color": "^1.0.9",
+    "@tsconfig/node20": "^20.1.8",
+    "@types/node": "^25.0.3",
+    "@unocss/reset": "^66.5.10",
+    "@vitejs/plugin-vue": "^6.0.3",
+    "@vue/tsconfig": "^0.8.1",
+    "naive-ui": "^2.43.2",
+    "npm-run-all2": "^8.0.4",
+    "pnpm": "^10.26.0",
+    "prettier": "^3.7.4",
+    "typescript": "~5.9.3",
+    "unocss": "^66.5.10",
+    "unplugin-auto-import": "^20.3.0",
+    "unplugin-vue-components": "^30.0.0",
+    "unplugin-vue-macros": "^2.14.5",
+    "vite": "^7.3.0",
+    "vue-tsc": "^3.1.8"
+  },
+  "engines": {
+    "pnpm": ">=10"
+  }
+}
