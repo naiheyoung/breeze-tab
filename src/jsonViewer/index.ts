@@ -17,6 +17,7 @@ let THRESHOLD = 300
 let metric = 1
 let lineNumberFg = ''
 let nextChunk = 0
+const regex = /^(https?:\/\/)([\w-]+\.)+[\w-]+(:\d+)?(\/[\w\-._~:/?#[\]@!$&'()*+,;=]*)?$/
 
 const link = document.createElement('link')
 link.rel = 'stylesheet'
@@ -38,6 +39,14 @@ window.addEventListener('message', e => {
   worker.postMessage({ text: e.data.payload, theme: 'vitesse-dark' })
 })
 
+const goto = (evt: PointerEvent) => {
+  const a = document.createElement('a')
+  a.href = (evt.currentTarget as HTMLSpanElement).textContent
+  a.target = '_blank'
+  a.click()
+  a.remove()
+}
+
 const render = (target: HTMLElement, tokens: Array<any>, start: number) => {
   const fragment = document.createDocumentFragment()
   for (let index = start; index < start + THRESHOLD; index++) {
@@ -56,6 +65,10 @@ const render = (target: HTMLElement, tokens: Array<any>, start: number) => {
       const span = document.createElement('span')
       span.textContent = _token.content
       span.style.color = _token.color
+      if (regex.test(_token.content)) {
+        span.classList.add('hover:cursor-pointer')
+        span.onclick = goto
+      }
       line.appendChild(span)
     }
 
