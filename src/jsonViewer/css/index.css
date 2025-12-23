@@ -1,0 +1,30 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+iframe {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+pre {
+  white-space: pre-wrap;
+  margin: 0;
+  padding: 0;
+}
+
+pre.shiki span.line {
+  position: relative;
+}
+
+pre.shiki span.line > [data-line] {
+  margin-right: 1rem;
+  user-select: none;
+}

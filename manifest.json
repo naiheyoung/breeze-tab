@@ -27,5 +27,29 @@
   "host_permissions": [
     "https://*/*",
     "http://*/*"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "jsonViewer/js/content.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start",
+      "type": "module"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "jsonViewer/index.html",
+        "jsonViewer/js/*",
+        "jsonViewer/css/*"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
   ]
 }

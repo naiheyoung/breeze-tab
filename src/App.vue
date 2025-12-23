@@ -460,11 +460,16 @@ nextTick(async () => {
     const blob = base64ToBlob(base64)
     const _url = useObjectUrl(blob)
     wallpaperEl.value!.style.backgroundImage = `url(${_url.value})`
-  } catch (error) {
+  } catch {
     resetWallpaper()
   }
-  githubUsername.value = result['affix']['v'].split('https://github.com/')[1]
-  githubIconIndex.value = githubIcons.indexOf(result['affix']['icon'])
+  try {
+    githubUsername.value = result['affix']['v'].split('https://github.com/')[1]
+    githubIconIndex.value = githubIcons.indexOf(result['affix']['icon'])
+  } catch {
+    githubUsername.value = 'https://github.com/'
+    githubIconIndex.value = 0
+  }
 })
 </script>
 
