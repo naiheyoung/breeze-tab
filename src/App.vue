@@ -471,6 +471,10 @@ nextTick(async () => {
     githubIconIndex.value = 0
   }
 })
+
+onMounted(() => {
+  requestScreenWakeUp()
+})
 </script>
 
 <style scoped>

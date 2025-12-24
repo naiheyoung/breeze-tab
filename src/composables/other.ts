@@ -128,3 +128,31 @@ export const base64ToBlob = (base64: string): Blob => {
   }
   return new Blob([bytes], { type: mime })
 }
+
+export let requestScreenWakeUp = async () => {
+  try {
+    let wakeLock: WakeLockSentinel | null = await navigator.wakeLock.request('screen')
+    document.addEventListener('visibilitychange', async () => {
+      if (document.visibilityState === 'visible') {
+        await requestScreenWakeUp()
+      }
+    })
+    wakeLock.onrelease = () => {
+      wakeLock = null
+    }
+    requestScreenWakeUp = async () => {
+      try {
+        let wakeLock: WakeLockSentinel | null = await navigator.wakeLock.request('screen')
+        wakeLock.onrelease = () => {
+          wakeLock = null
+        }
+        return wakeLock
+      } catch {
+        console.warn('screen wake up not support.')
+      }
+    }
+    return wakeLock
+  } catch {
+    console.warn('screen wake up not support.')
+  }
+}

@@ -7,6 +7,7 @@
 export {}
 declare global {
   const EffectScope: typeof import('vue').EffectScope
+  const REQUESTSCREENWAKE: typeof import('./src/composables/other').REQUESTSCREENWAKE
   const asyncComputed: typeof import('@vueuse/core').asyncComputed
   const autoResetRef: typeof import('@vueuse/core').autoResetRef
   const base64To: typeof import('./src/composables/other').base64To
@@ -95,6 +96,11 @@ declare global {
   const refManualReset: typeof import('@vueuse/core').refManualReset
   const refThrottled: typeof import('@vueuse/core').refThrottled
   const refWithControl: typeof import('@vueuse/core').refWithControl
+  const request: typeof import('./src/composables/other').request
+  const requestScreenWake: typeof import('./src/composables/other').requestScreenWake
+  const requestScreenWakeUp: typeof import('./src/composables/other').requestScreenWakeUp
+  const requestWake: typeof import('./src/composables/other').requestWake
+  const requestscreenwake: typeof import('./src/composables/other').requestscreenwake
   const resolveComponent: typeof import('vue').resolveComponent
   const resolveRef: typeof import('@vueuse/core').resolveRef
   const resolveUnref: typeof import('@vueuse/core')['resolveUnref']
@@ -403,6 +409,7 @@ declare module 'vue' {
     readonly refManualReset: UnwrapRef<typeof import('@vueuse/core')['refManualReset']>
     readonly refThrottled: UnwrapRef<typeof import('@vueuse/core')['refThrottled']>
     readonly refWithControl: UnwrapRef<typeof import('@vueuse/core')['refWithControl']>
+    readonly requestScreenWakeUp: UnwrapRef<typeof import('./src/composables/other')['requestScreenWakeUp']>
     readonly resolveComponent: UnwrapRef<typeof import('vue')['resolveComponent']>
     readonly resolveRef: UnwrapRef<typeof import('@vueuse/core')['resolveRef']>
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
