@@ -4,7 +4,7 @@ let highlighterCache = new Map<string, Highlighter>()
 let codeSnippet = null
 
 self.onmessage = async e => {
-  const { text, theme = 'dracula' } = e.data
+  const { text, theme = 'vitesse-dark' } = e.data
   if (text) {
     codeSnippet = text
   }

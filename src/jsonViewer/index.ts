@@ -36,7 +36,7 @@ window.addEventListener('message', e => {
   if (e.data.type !== 'json') {
     return
   }
-  worker.postMessage({ text: e.data.payload, theme: 'vitesse-dark' })
+  worker.postMessage({ text: e.data.payload, theme: codeTheme.value })
 })
 
 const goto = (evt: PointerEvent) => {

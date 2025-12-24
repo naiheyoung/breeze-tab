@@ -26,6 +26,10 @@ interface TabSettings {
     type: string
     v: string
     blur: number
+    position: {
+      x: number
+      y: number
+    }
   }
   search: {
     active: boolean
@@ -62,7 +66,11 @@ export const useStore = defineStore('extension', () => {
       wallpaper: {
         type: 'local',
         v: '',
-        blur: 2
+        blur: 2,
+        position: {
+          x: 50,
+          y: 50
+        }
       },
       search: {
         active: true,

@@ -13,7 +13,9 @@
         ref="wallpaper"
         class="wallpaper absolute bg-cover opacity100 bg-no-repeat"
         :style="{
-          filter: `blur(var(--bg-blur))`
+          filter: `blur(var(--bg-blur))`,
+          backgroundPositionX: `${tabSettings.wallpaper.position.x}%`,
+          backgroundPositionY: `${tabSettings.wallpaper.position.y}%`
         }"></div>
       <div class="content overflow-hidden fixed z-9 flex w-full h-full">
         <div
@@ -205,6 +207,34 @@
                   :show-feedback="false">
                   <div class="flex gap-x-2 items-center w-full">
                     <n-slider v-model:value="tabSettings.wallpaper.blur" :step="1" :max="20" />
+                  </div>
+                </n-form-item>
+                <n-form-item
+                  label="position"
+                  label-placement="left"
+                  size="small"
+                  :show-feedback="false">
+                  <div class="flex gap-x-3 w-full">
+                    <n-button class="flex-grow-1" @click="setWallpaperPosition('top')">
+                      <template #icon>
+                        <div class="i-carbon:caret-up"></div>
+                      </template>
+                    </n-button>
+                    <n-button class="flex-grow-1" @click="setWallpaperPosition('right')">
+                      <template #icon>
+                        <div class="i-carbon:caret-right"></div>
+                      </template>
+                    </n-button>
+                    <n-button class="flex-grow-1" @click="setWallpaperPosition('down')">
+                      <template #icon>
+                        <div class="i-carbon:caret-down"></div>
+                      </template>
+                    </n-button>
+                    <n-button class="flex-grow-1" @click="setWallpaperPosition('left')">
+                      <template #icon>
+                        <div class="i-carbon:caret-left"></div>
+                      </template>
+                    </n-button>
                   </div>
                 </n-form-item>
               </div>
@@ -440,6 +470,26 @@ const switchGithubIcon = () => {
   tabSettings.value.affix.icon = githubIcons[githubIconIndex.value]
 }
 
+const setWallpaperPosition = (type: 'top' | 'right' | 'down' | 'left') => {
+  if (type === 'top') {
+    if (tabSettings.value.wallpaper.position.y - 1 >= 0) {
+      tabSettings.value.wallpaper.position.y -= 1
+    }
+  } else if (type === 'right') {
+    if (tabSettings.value.wallpaper.position.x + 1 <= 100) {
+      tabSettings.value.wallpaper.position.x += 1
+    }
+  } else if (type === 'down') {
+    if (tabSettings.value.wallpaper.position.y + 1 <= 100) {
+      tabSettings.value.wallpaper.position.y += 1
+    }
+  } else {
+    if (tabSettings.value.wallpaper.position.x - 1 >= 0) {
+      tabSettings.value.wallpaper.position.x -= 1
+    }
+  }
+}
+
 const resizeFn = useDebounceFn(() => {
   wrapperOffset.value = innerHeight / 2
 })
@@ -467,7 +517,7 @@ nextTick(async () => {
     githubUsername.value = result['affix']['v'].split('https://github.com/')[1]
     githubIconIndex.value = githubIcons.indexOf(result['affix']['icon'])
   } catch {
-    githubUsername.value = 'https://github.com/'
+    githubUsername.value = ''
     githubIconIndex.value = 0
   }
 })
@@ -494,10 +544,10 @@ main {
 
 .wallpaper {
   inset: calc(var(--inner-offset) * var(--bg-blur));
-  background-position: 50%;
   transition:
     background-image 0.3s,
-    background-color 0.3s;
+    background-color 0.3s,
+    background-position 0.3s;
   transition-timing-function: ease;
 }
 
