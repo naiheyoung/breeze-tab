@@ -23,14 +23,11 @@ const validateJSON = (text: string) => {
 
 ;(function () {
   document.addEventListener('DOMContentLoaded', () => {
+    if (!document.body) return
     const target = document.body.children[0] as HTMLPreElement
-    if (target.tagName !== 'PRE') {
-      return
-    }
+    if (target.tagName !== 'PRE') return
     const valid = validateJSON(target.textContent)
-    if (!valid) {
-      return
-    }
+    if (!valid) return
     target.style.display = 'none'
     target.style.position = 'absolute'
     target.style.zIndex = '-1'

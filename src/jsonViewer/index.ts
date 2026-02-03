@@ -66,7 +66,7 @@ const render = (target: HTMLElement, tokens: Array<any>, start: number) => {
       span.textContent = _token.content
       span.style.color = _token.color
       if (regex.test(_token.content)) {
-        span.classList.add('hover:cursor-pointer')
+        span.classList.add('hover:cursor-pointer', 'hover:opacity85', 'transition-opacity-250')
         span.onclick = goto
       }
       line.appendChild(span)
