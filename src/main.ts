@@ -2,9 +2,9 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import { createPinia } from 'pinia'
 
-import '@unocss/reset/tailwind.css'
+import '@unocss/reset/tailwind-v4.css'
+import 'virtual:uno.css'
 import '~/assets/css/index.css'
-import 'uno.css'
 
 const pinia = createPinia()
 const app = createApp(App)
