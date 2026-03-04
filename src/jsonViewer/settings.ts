@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { watch, computed } from 'vue'
+import { computed, watch } from 'vue'
 import { useLocalStorage } from '@vueuse/core'
 import { BundledTheme } from './shiki.bundle'
 

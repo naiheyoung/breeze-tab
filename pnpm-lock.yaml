@@ -36,6 +36,9 @@ importers:
       '@naiheyoung/color':
         specifier: ^1.0.9
         version: 1.0.9
+      '@naiheyoung/prettier':
+        specifier: ^0.0.5
+        version: 0.0.5(prettier@3.7.4)
       '@shikijs/core':
         specifier: ^3.20.0
         version: 3.20.0
@@ -358,6 +361,11 @@ packages:
   '@naiheyoung/color@1.0.9':
     resolution: {integrity: sha512-q43WF0Ttz4vWkU/cL1NG+bcKLEDabsyf1D8/+UCUmiLZmUoOD+x0hNKXBTikiZUTcqCh7JFxv8TFsKfoA3tdig==}
     hasBin: true
+
+  '@naiheyoung/prettier@0.0.5':
+    resolution: {integrity: sha512-x71s4K8Vu/DCpy+H26oiCNYOJjBZaER0N25Imj6vudmm8LSvl0OzebDGxXRcyaMgpaJnF8isLtiYuMv2h2RhyQ==}
+    peerDependencies:
+      prettier: ^3.0.0
 
   '@napi-rs/wasm-runtime@0.2.12':
     resolution: {integrity: sha512-ZVWUcfwY4E/yPitQJl481FjFo3K22D6qF0DuFH6Y/nbnE11GY5uguDxZMGXPQ8WQ0128MXQD7TnfHyK4oWoIJQ==}
@@ -1926,6 +1934,10 @@ snapshots:
   '@juggle/resize-observer@3.4.0': {}
 
   '@naiheyoung/color@1.0.9': {}
+
+  '@naiheyoung/prettier@0.0.5(prettier@3.7.4)':
+    dependencies:
+      prettier: 3.7.4
 
   '@napi-rs/wasm-runtime@0.2.12':
     dependencies:

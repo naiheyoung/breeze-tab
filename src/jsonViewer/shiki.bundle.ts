@@ -2,12 +2,9 @@
 import type {
   DynamicImportLanguageRegistration,
   DynamicImportThemeRegistration,
-  HighlighterGeneric,
+  HighlighterGeneric
 } from '@shikijs/types'
-import {
-  createBundledHighlighter,
-  createSingletonShorthands,
-} from '@shikijs/core'
+import { createBundledHighlighter, createSingletonShorthands } from '@shikijs/core'
 import { createJavaScriptRawEngine } from '@shikijs/engine-javascript/raw'
 
 type BundledLanguage = 'json'
@@ -20,16 +17,15 @@ type BundledTheme =
 type Highlighter = HighlighterGeneric<BundledLanguage, BundledTheme>
 
 const bundledLanguages = {
-  json: () => import('@shikijs/langs-precompiled/json'),
+  json: () => import('@shikijs/langs-precompiled/json')
 } as Record<BundledLanguage, DynamicImportLanguageRegistration>
 
 const bundledThemes = {
   'vitesse-dark': () => import('@shikijs/themes/vitesse-dark'),
   'one-dark-pro': () => import('@shikijs/themes/one-dark-pro'),
   'github-dark-dimmed': () => import('@shikijs/themes/github-dark-dimmed'),
-  'material-theme-darker': () =>
-    import('@shikijs/themes/material-theme-darker'),
-  dracula: () => import('@shikijs/themes/dracula'),
+  'material-theme-darker': () => import('@shikijs/themes/material-theme-darker'),
+  dracula: () => import('@shikijs/themes/dracula')
 } as Record<BundledTheme, DynamicImportThemeRegistration>
 
 const createHighlighter = /* @__PURE__ */ createBundledHighlighter<
@@ -38,7 +34,7 @@ const createHighlighter = /* @__PURE__ */ createBundledHighlighter<
 >({
   langs: bundledLanguages,
   themes: bundledThemes,
-  engine: () => createJavaScriptRawEngine(),
+  engine: () => createJavaScriptRawEngine()
 })
 
 const {
@@ -48,10 +44,8 @@ const {
   codeToTokens,
   codeToTokensWithThemes,
   getSingletonHighlighter,
-  getLastGrammarState,
-} = /* @__PURE__ */ createSingletonShorthands<BundledLanguage, BundledTheme>(
-  createHighlighter,
-)
+  getLastGrammarState
+} = /* @__PURE__ */ createSingletonShorthands<BundledLanguage, BundledTheme>(createHighlighter)
 
 export {
   bundledLanguages,
@@ -63,6 +57,6 @@ export {
   codeToTokensWithThemes,
   createHighlighter,
   getLastGrammarState,
-  getSingletonHighlighter,
+  getSingletonHighlighter
 }
 export type { BundledLanguage, BundledTheme, Highlighter }

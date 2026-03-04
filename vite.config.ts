@@ -20,13 +20,17 @@ export default defineConfig({
   build: {
     outDir: 'extension',
     rollupOptions: {
+      input: {
+        background: 'scripts/more_contextmenu.ts',
+        app: 'index.html'
+      },
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
             return 'vendor'
           }
         },
-        entryFileNames: 'js/app.js',
+        entryFileNames: 'js/[name].js',
         chunkFileNames: 'js/[name].[hash].js',
         assetFileNames(chunkInfo) {
           if (chunkInfo.name?.endsWith('.css')) {

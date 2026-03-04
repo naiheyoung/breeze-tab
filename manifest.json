@@ -1,7 +1,7 @@
 {
   "name": "Breeze Tab",
   "description": "Chrome Start Page",
-  "version": "1.0",
+  "version": "1.4",
   "manifest_version": 3,
   "icons": {
     "16": "images/icon-16.png",
@@ -21,8 +21,13 @@
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
+  "background": {
+    "service_worker": "js/background.js"
+  },
   "permissions": [
-    "storage"
+    "storage",
+    "contextMenus",
+    "tabs"
   ],
   "host_permissions": [
     "https://*/*",

@@ -2,37 +2,37 @@
   <n-config-provider :theme="darkTheme" :theme-overrides="themeOverrides">
     <main
       font-mono
-      text="center gray-700 dark:gray-200"
-      w-full
       h-full
       overflow-hidden
-      select-none>
+      select-none
+      text="center gray-700 dark:gray-200"
+      w-full>
       <div
         class="mask absolute block z-3 pointer-events-none opacity100 bg-no-repeat bg-cover"></div>
       <div
         ref="wallpaper"
-        class="wallpaper absolute bg-cover opacity100 bg-no-repeat"
         :style="{
           filter: `blur(var(--bg-blur))`,
           backgroundPositionX: `${tabSettings.wallpaper.position.x}%`,
           backgroundPositionY: `${tabSettings.wallpaper.position.y}%`
-        }"></div>
+        }"
+        class="wallpaper absolute bg-cover opacity100 bg-no-repeat"></div>
       <div class="content overflow-hidden fixed z-9 flex w-full h-full">
         <div
-          class="wrapper flex mx-auto flex-col transition-all duration-350 items-center justify-center"
-          :style="{ marginTop: `-${wrapperOffset}px` }">
+          :style="{ marginTop: `-${wrapperOffset}px` }"
+          class="wrapper flex mx-auto flex-col transition-all duration-350 items-center justify-center">
           <TransitionGroup name="datetime">
             <div
-              class="time text-6.875rem leading-6.875rem transition-colors"
               style="color: rgba(255, 255, 255, 0.62)"
               :style="{ color: tabSettings.time.color }"
-              v-text="format(timeFormatter)"
-              v-if="tabSettings.time.active"></div>
+              class="time text-6.875rem leading-6.875rem transition-colors"
+              v-if="tabSettings.time.active"
+              v-text="format(timeFormatter)"></div>
             <div
-              class="date transition-colors"
               :style="{ color: tabSettings.date.color }"
-              v-text="format(dateFormatter)"
-              v-if="tabSettings.date.active"></div>
+              class="date transition-colors"
+              v-if="tabSettings.date.active"
+              v-text="format(dateFormatter)"></div>
           </TransitionGroup>
         </div>
       </div>
@@ -45,10 +45,10 @@
         <Transition name="datetime">
           <div v-if="tabSettings.search.active">
             <div class="hover:cursor-pointer" v-if="tabSettings.search.engine === 'google'">
-              <a href="https://google.com" class="i-logos:google-icon"></a>
+              <a class="i-logos:google-icon" href="https://google.com"></a>
             </div>
             <div class="hover:cursor-pointer" v-if="tabSettings.search.engine === 'bing'">
-              <a href="https://bing.com" class="i-logos:bing"></a>
+              <a class="i-logos:bing" href="https://bing.com"></a>
             </div>
           </div>
         </Transition>
@@ -63,10 +63,10 @@
 
       <!-- settings box -->
       <n-drawer
-        v-model:show="settingsBoxActive"
-        :width="502"
+        :auto-focus="false"
         :placement="placement"
-        :auto-focus="false">
+        :width="502"
+        v-model:show="settingsBoxActive">
         <n-drawer-content title="Settings">
           <template #header>
             <div class="flex gap-x-1">
@@ -78,86 +78,86 @@
             :default-expanded-names="['datetime', 'background', 'search', 'affix']"
             :trigger-areas="['main']">
             <!-- datetime -->
-            <n-collapse-item title="Datetime" name="datetime">
+            <n-collapse-item name="datetime" title="Datetime">
               <template #arrow>&nbsp;</template>
               <template #header><span class="relative">Datetime</span></template>
               <template #header-extra>
                 <div class="i-carbon:calendar-settings"></div>
               </template>
-              <div flex flex-col gap-y-2 font-mono>
+              <div flex flex-col font-mono gap-y-2>
                 <!-- time -->
                 <n-form-item
+                  :show-feedback="false"
                   label="time"
                   label-placement="left"
-                  size="small"
-                  :show-feedback="false">
+                  size="small">
                   <div class="flex gap-x-2 items-center w-full">
-                    <n-switch v-model:value="tabSettings.time.active" size="small">
+                    <n-switch size="small" v-model:value="tabSettings.time.active">
                       <template #checked-icon>
                         <div class="i-carbon:alarm"></div>
                       </template>
                     </n-switch>
                     <n-input
-                      v-model:value="tabSettings.time.formatter"
+                      :disabled="!tabSettings.time.active"
                       placeholder="enter time formatter"
-                      :disabled="!tabSettings.time.active" />
+                      v-model:value="tabSettings.time.formatter" />
                     <n-color-picker
                       class="w-27.5"
-                      size="small"
-                      :swatches="['rgba(255, 255, 255, 0.62)']"
                       :disabled="!tabSettings.time.active"
+                      :swatches="['rgba(255, 255, 255, 0.62)']"
+                      size="small"
                       v-model:value="tabSettings.time.color" />
                   </div>
                 </n-form-item>
                 <!-- date -->
                 <n-form-item
+                  :show-feedback="false"
                   label="date"
                   label-placement="left"
-                  size="small"
-                  :show-feedback="false">
+                  size="small">
                   <div class="flex gap-x-2 items-center w-full">
-                    <n-switch v-model:value="tabSettings.date.active" size="small">
+                    <n-switch size="small" v-model:value="tabSettings.date.active">
                       <template #checked-icon>
                         <div class="i-carbon:calendar"></div>
                       </template>
                     </n-switch>
                     <n-input
-                      v-model:value="tabSettings.date.formatter"
+                      :disabled="!tabSettings.date.active"
                       placeholder="enter date formatter"
-                      :disabled="!tabSettings.date.active" />
+                      v-model:value="tabSettings.date.formatter" />
                     <n-color-picker
                       class="w-27.5"
-                      size="small"
-                      :swatches="['rgb(229, 231, 235)']"
                       :disabled="!tabSettings.date.active"
+                      :swatches="['rgb(229, 231, 235)']"
+                      size="small"
                       v-model:value="tabSettings.date.color" />
                   </div>
                 </n-form-item>
                 <!-- week -->
                 <n-form-item
+                  :show-feedback="false"
                   label="week"
                   label-placement="left"
-                  size="small"
-                  :show-feedback="false">
+                  size="small">
                   <div class="flex gap-x-2 items-center">
                     <n-radio-group
-                      v-model:value="tabSettings.week.locale"
-                      name="week"
                       :disabled="!tabSettings.date.active"
+                      name="week"
                       size="small"
+                      v-model:value="tabSettings.week.locale"
                       @update:value="weekLocaleUpdateFn">
                       <n-radio-button
-                        v-for="locale in weekLocale"
                         :key="locale.value"
+                        :label="locale.label"
                         :value="locale.value"
-                        :label="locale.label" />
+                        v-for="locale in weekLocale" />
                     </n-radio-group>
                   </div>
                 </n-form-item>
               </div>
             </n-collapse-item>
             <!-- background -->
-            <n-collapse-item title="Background" name="background">
+            <n-collapse-item name="background" title="Background">
               <template #arrow>&nbsp;</template>
               <template #header><span class="relative">Background</span></template>
               <template #header-extra>
@@ -170,14 +170,14 @@
                   default wallpaper
                 </n-tooltip>
               </template>
-              <div flex flex-col gap-y-2 font-mono>
+              <div flex flex-col font-mono gap-y-2>
                 <div ref="uploadWrapper" class="bg-cover bg-no-repeat">
                   <n-upload
                     ref="uploadRef"
-                    directory-dnd
-                    accept=".jpg,.jpeg,.png"
                     :custom-request="wallpaperUpload"
-                    :show-file-list="false">
+                    :show-file-list="false"
+                    accept=".jpg,.jpeg,.png"
+                    directory-dnd>
                     <n-upload-dragger class="py-48.4px">
                       <div style="margin-bottom: 12px">
                         <div class="i-lucide:wallpaper text-2xl"></div>
@@ -187,12 +187,12 @@
                   </n-upload>
                 </div>
                 <n-form-item
+                  :show-feedback="false"
                   label="image url"
                   label-placement="left"
-                  size="small"
-                  :show-feedback="false">
+                  size="small">
                   <div class="flex gap-x-2 items-center w-full">
-                    <n-input v-model:value="imageUrl" placeholder="enter wallpaper url">
+                    <n-input placeholder="enter wallpaper url" v-model:value="imageUrl">
                       <template #prefix>
                         <div class="i-carbon:url"></div>
                       </template>
@@ -201,19 +201,19 @@
                   </div>
                 </n-form-item>
                 <n-form-item
+                  :show-feedback="false"
                   label="blur"
                   label-placement="left"
-                  size="small"
-                  :show-feedback="false">
+                  size="small">
                   <div class="flex gap-x-2 items-center w-full">
-                    <n-slider v-model:value="tabSettings.wallpaper.blur" :step="1" :max="20" />
+                    <n-slider :max="20" :step="1" v-model:value="tabSettings.wallpaper.blur" />
                   </div>
                 </n-form-item>
                 <n-form-item
+                  :show-feedback="false"
                   label="position"
                   label-placement="left"
-                  size="small"
-                  :show-feedback="false">
+                  size="small">
                   <div class="flex gap-x-3 w-full">
                     <n-button class="flex-grow-1" @click="setWallpaperPosition('top')">
                       <template #icon>
@@ -240,42 +240,42 @@
               </div>
             </n-collapse-item>
             <!-- search -->
-            <n-collapse-item title="Search" name="search">
+            <n-collapse-item name="search" title="Search">
               <template #arrow>&nbsp;</template>
               <template #header><span class="relative">SearchEngine</span></template>
               <template #header-extra>
                 <div class="i-carbon:contour-finding"></div>
               </template>
-              <div flex flex-col gap-y-2 font-mono>
+              <div flex flex-col font-mono gap-y-2>
                 <n-form-item
+                  :show-feedback="false"
                   label="search"
                   label-placement="left"
-                  size="small"
-                  :show-feedback="false">
+                  size="small">
                   <div class="flex gap-x-2 items-center">
-                    <n-switch v-model:value="tabSettings.search.active" size="small">
+                    <n-switch size="small" v-model:value="tabSettings.search.active">
                       <template #checked-icon>
                         <div class="i-carbon:ibm-engineering-workflow-mgmt"></div>
                       </template>
                     </n-switch>
                     <n-radio-group
-                      v-model:value="tabSettings.search.engine"
-                      name="search"
                       :disabled="!tabSettings.search.active"
-                      size="small">
+                      name="search"
+                      size="small"
+                      v-model:value="tabSettings.search.engine">
                       <n-radio-button
-                        v-for="engine in searchEngine"
+                        :disabled="engine.label === 'Baidu' || engine.label === 'baidu'"
                         :key="engine.label"
-                        :value="engine.label.toLowerCase()"
                         :label="engine.label"
-                        :disabled="engine.label === 'Baidu' || engine.label === 'baidu'" />
+                        :value="engine.label.toLowerCase()"
+                        v-for="engine in searchEngine" />
                     </n-radio-group>
                   </div>
                 </n-form-item>
               </div>
             </n-collapse-item>
             <!-- affix -->
-            <n-collapse-item title="Affix" name="affix">
+            <n-collapse-item name="affix" title="Affix">
               <template #arrow>&nbsp;</template>
               <template #header><span class="relative">Affix</span></template>
               <template #header-extra>
@@ -288,22 +288,22 @@
                   switch github affix icon
                 </n-tooltip>
               </template>
-              <div flex flex-col gap-y-2 font-mono>
+              <div flex flex-col font-mono gap-y-2>
                 <n-form-item
+                  :show-feedback="false"
                   label="github"
                   label-placement="left"
-                  size="small"
-                  :show-feedback="false">
+                  size="small">
                   <div class="flex gap-x-2 items-center">
-                    <n-switch v-model:value="tabSettings.affix.active" size="small">
+                    <n-switch size="small" v-model:value="tabSettings.affix.active">
                       <template #checked-icon>
                         <div class="i-lucide:github"></div>
                       </template>
                     </n-switch>
                     <n-input
-                      v-model:value="githubUsername"
                       :disabled="!tabSettings.affix.active"
-                      placeholder="username">
+                      placeholder="username"
+                      v-model:value="githubUsername">
                       <template #prefix>
                         <span>https://github.com/</span>
                       </template>
@@ -325,10 +325,10 @@
 </template>
 
 <script setup lang="ts">
+import type { DrawerPlacement, UploadCustomRequestOptions } from 'naive-ui'
 import { storeToRefs } from 'pinia'
 import { useStore } from './stores/extension'
 import { darkTheme, GlobalThemeOverrides } from 'naive-ui'
-import type { DrawerPlacement, UploadCustomRequestOptions } from 'naive-ui'
 
 const themeOverrides: GlobalThemeOverrides = {
   common: {

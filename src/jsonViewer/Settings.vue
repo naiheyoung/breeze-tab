@@ -4,29 +4,29 @@
       <div
         class="i-carbon:settings hover:cursor-pointer fixed right-4 top-4"
         @click="settingsActive = true"></div>
-      <n-drawer v-model:show="settingsActive" :width="502" placement="right" class="font-mono">
+      <n-drawer class="font-mono" :width="502" placement="right" v-model:show="settingsActive">
         <n-drawer-content title="Settings">
           <div class="flex flex-col gap-y-4">
             <n-form-item
+              :show-feedback="false"
               label="theme"
-              size="small"
               label-placement="left"
-              :show-feedback="false">
+              size="small">
               <template #label>
                 <span class="i-carbon:color-palette vertical-middle"></span>
               </template>
-              <n-select v-model:value="codeTheme" :options="codeThemeOptions" />
+              <n-select :options="codeThemeOptions" v-model:value="codeTheme" />
             </n-form-item>
             <n-form-item
+              :show-feedback="false"
               label="fSize"
-              size="small"
               label-placement="left"
-              :show-feedback="false">
+              size="small">
               <template #label>
                 <span class="i-carbon:text-font vertical-middle"></span>
               </template>
-              <n-slider v-model:value="textSize" :step="1" :max="30" :min="14" />
-              <n-tooltip :show-arrow="false" trigger="hover" placement="bottom">
+              <n-slider :max="30" :min="14" :step="1" v-model:value="textSize" />
+              <n-tooltip :show-arrow="false" placement="bottom" trigger="hover">
                 <template #trigger>
                   <span class="w-fit">(temporary)</span>
                 </template>
@@ -41,12 +41,13 @@
 </template>
 
 <script setup lang="ts">
+import type { GlobalThemeOverrides, SelectOption } from 'naive-ui'
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useSettings } from './settings'
 import {
-  NConfigProvider,
   darkTheme,
+  NConfigProvider,
   NDrawer,
   NDrawerContent,
   NFormItem,
@@ -54,7 +55,6 @@ import {
   NSlider,
   NTooltip
 } from 'naive-ui'
-import type { GlobalThemeOverrides, SelectOption } from 'naive-ui'
 
 const themeOverrides: GlobalThemeOverrides = {
   common: {
